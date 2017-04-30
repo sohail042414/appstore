@@ -63,7 +63,7 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    /**
+    /**s
      * Login action.
      *
      * @return string
