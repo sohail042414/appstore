@@ -26,7 +26,7 @@ class Category extends \common\models\Category {
     public function rules() {
         return [
             [['parent', 'show_in_menu', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'created_at', 'updated_at'], 'required'],
+            [['title'], 'required'],
             [['description'], 'string'],
             [['title'], 'string', 'max' => 50],
         ];

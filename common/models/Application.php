@@ -23,21 +23,19 @@ use Yii;
  * @property ApplicationCategory[] $applicationCategories
  * @property Category[] $categories
  */
-class Application extends \yii\db\ActiveRecord
-{
+class Application extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return '{{%application}}';
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'title' => 'Title',
@@ -56,24 +54,39 @@ class Application extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getApplicationCategories()
-    {
+    public function getApplicationCategories() {
         return $this->hasMany(ApplicationCategory::className(), ['application_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategories()
-    {
+    public function getCategories() {
         return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('{{%application_category}}', ['application_id' => 'id']);
     }
+
+    public function behaviors() {
+        return [
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    \yii\db\ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    \yii\db\ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+            ],
+            [
+                'class' => \yii\behaviors\BlameableBehavior::className(),
+                'createdByAttribute' => 'user_id',
+                'updatedByAttribute' => 'updated_by',
+            ],
+        ];
+    }
+
 }
