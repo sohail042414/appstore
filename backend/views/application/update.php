@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\bootstrap\Tabs;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Application */
@@ -14,8 +15,32 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <?=
+    Tabs::widget([
+        'items' => [
+            [
+                'label' => 'General',
+                'content' => $this->render('_form', ['model' => $model]),
+                'active' => true
+            ],
+            [
+                'label' => 'Images',
+                'content' => $this->render('_images', [
+                    'model' => $model,
+                    'imageDataProvider' => $imageDataProvider,
+                    'appliationImageModel' => $appliationImageModel
+                ]),
+            ],
+    ]]);
+    ?>
+
+    <?php
+    /*
+      $this->render('_form', [
+      'model' => $model,
+      ])
+     * 
+     */
+    ?>
 
 </div>

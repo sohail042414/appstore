@@ -13,6 +13,7 @@ use Yii;
  * @property string $playstore_url
  * @property double $version
  * @property integer $user_id
+ * @property integer $status
  * @property integer $special
  * @property integer $featured
  * @property integer $updated_by
@@ -43,6 +44,7 @@ class Application extends \yii\db\ActiveRecord {
             'playstore_url' => 'Playstore Url',
             'version' => 'Version',
             'user_id' => 'User ID',
+            'status' => 'Status',
             'special' => 'Special',
             'featured' => 'Featured',
             'updated_by' => 'Updated By',

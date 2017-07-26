@@ -30,7 +30,7 @@ class Application extends \common\models\Application {
      */
     public function rules() {
         return [
-            [['title', 'playstore_url', 'user_id', 'created_at', 'updated_at'], 'required'],
+            [['title', 'playstore_url',], 'required'],
             [['description', 'playstore_url'], 'string'],
             [['version'], 'number'],
             [['user_id', 'special', 'featured', 'updated_by', 'created_at', 'updated_at'], 'integer'],

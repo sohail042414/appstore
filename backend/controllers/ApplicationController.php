@@ -8,17 +8,18 @@ use backend\models\SearchApplication;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\SearchApplicationImage;
+use yii\web\UploadedFile;
 
 /**
  * ApplicationController implements the CRUD actions for Application model.
  */
-class ApplicationController extends Controller
-{
+class ApplicationController extends Controller {
+
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -33,14 +34,13 @@ class ApplicationController extends Controller
      * Lists all Application models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new SearchApplication();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -49,10 +49,9 @@ class ApplicationController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
@@ -61,15 +60,21 @@ class ApplicationController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Application();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            if (!empty($model->errors)) {
+                echo "<pre>";
+                print_r($model->errors);
+                exit;
+            }
+
             return $this->render('create', [
-                'model' => $model,
+                        'model' => $model,
             ]);
         }
     }
@@ -80,17 +85,55 @@ class ApplicationController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        $appliationImageModel = new \backend\models\ApplicationImage;
+        $appliationImageModel->application_id = $id;
+
+        $searchImageModel = new SearchApplicationImage();
+        $imageDataProvider = $searchImageModel->search(['SearchApplicationImage' => ['application_id' => $id]]);
+
+        $post = Yii::$app->request->post();
+
+        if (isset($post['ApplicationImage'])) {
+
+            $appliationImageModel->imageFile = UploadedFile::getInstance($appliationImageModel, 'imageFile');
+
+            if ($appliationImageModel->upload()) {
+
+
+//                echo "<pre>";
+//                print_r($appliationImageModel);
+//                exit;
+
+                if ($appliationImageModel->load($post) && $appliationImageModel->save()) {
+
+                    echo "<pre>";
+                    print_r($appliationImageModel->errors);
+                    exit;
+                }
+            } else {
+                echo "<pre>232323232";
+                print_r($appliationImageModel->errors);
+                exit;
+            }
         }
+
+
+        if (isset($post['Application'])) {
+
+            if ($model->load($post) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
+
+
+        return $this->render('update', [
+                    'model' => $model,
+                    'imageDataProvider' => $imageDataProvider,
+                    'appliationImageModel' => $appliationImageModel
+        ]);
     }
 
     /**
@@ -99,8 +142,7 @@ class ApplicationController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -113,12 +155,12 @@ class ApplicationController extends Controller
      * @return Application the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = Application::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }

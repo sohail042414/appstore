@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m170430_075204_create_table_category extends Migration {
+class m170722_200900_create_table_category extends Migration {
 
     public function safeUp() {
         $this->createTable('{{%category}}', [
@@ -14,8 +14,6 @@ class m170430_075204_create_table_category extends Migration {
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ]);
-
-        //$this->addForeignKey('fk_category_parent', '{{%category}}', 'parent', '{{%category}}', 'id', 'RESTRICT', 'CASCADE');
     }
 
     public function safeDown() {

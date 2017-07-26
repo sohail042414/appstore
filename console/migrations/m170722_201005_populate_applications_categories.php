@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m170430_210903_populate_categories_apps extends Migration {
+class m170722_201005_populate_applications_categories extends Migration {
 
     // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp() {
@@ -20,6 +20,7 @@ class m170430_210903_populate_categories_apps extends Migration {
         $category_id = $this->db->getLastInsertID();
 
         $this->insert('{{%application}}', [
+            'package_id' => 'testingapplicasdfasfasdationasdfasdjflasjdfasdjfl',
             'title' => 'Sub way surfers',
             'description' => 'This is very good game',
             'playstore_url' => 'http://play.google.com',
@@ -36,6 +37,7 @@ class m170430_210903_populate_categories_apps extends Migration {
         ]);
 
         $this->insert('{{%application}}', [
+            'package_id' => 'testingapplicationasdfasdjflsdfasdfasjdfasdjfl',
             'title' => 'Candy Crush',
             'description' => 'Here you crush candies',
             'playstore_url' => 'http://play.google.com',
@@ -63,6 +65,7 @@ class m170430_210903_populate_categories_apps extends Migration {
         $category_id = $this->db->getLastInsertID();
 
         $this->insert('{{%application}}', [
+            'package_id' => 'testingapplicationasdfasdjflasjdfasdjfasdfasdfl',
             'title' => 'Ten Sports',
             'description' => ' Here you watch ten sports live.',
             'playstore_url' => 'http://play.google.com',
@@ -81,6 +84,7 @@ class m170430_210903_populate_categories_apps extends Migration {
 
 
         $this->insert('{{%application}}', [
+            'package_id' => 'testingapplicationasdfasdjflasjdfasdjfl',
             'title' => 'Espncricinfo',
             'description' => ' Here you can check all live cricket matches around the globe.',
             'playstore_url' => 'http://play.google.com',
@@ -108,6 +112,7 @@ class m170430_210903_populate_categories_apps extends Migration {
 
 
         $this->insert('{{%application}}', [
+            'package_id' => 'testingapplicationasdfas343djflasjdfasdjfl',
             'title' => 'Doctors online',
             'description' => ' Many doctors available to discuss you problems here.',
             'playstore_url' => 'http://play.google.com',
@@ -125,6 +130,7 @@ class m170430_210903_populate_categories_apps extends Migration {
 
 
         $this->insert('{{%application}}', [
+            'package_id' => 'testingapplicationasdfasdjflaasdfas222sjdfasdjfl',
             'title' => 'Fitnuss club ',
             'description' => ' See each and everything related to fitness.',
             'playstore_url' => 'http://play.google.com',
@@ -142,7 +148,9 @@ class m170430_210903_populate_categories_apps extends Migration {
     }
 
     public function safeDown() {
-        
+        $this->delete('{{%application_category}}');
+        $this->delete('{{%application}}');
+        $this->delete('{{%category}}');
     }
 
 }
