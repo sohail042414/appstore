@@ -43,6 +43,7 @@ class m170124_134745_populate_rbac extends Migration {
         $this->insert('{{%user}}', [
             'role_id' => 1,
             'username' => 'developer',
+            'display_name' => 'Developer Khan',
             'auth_key' => 'sMCCWHi28a9KvjSaA04qFXoWWgo46lwP',
             'password_hash' => '$2y$13$bjc5x/Nclng/uGazUbzfheXCQFByBR2XdtL6bDBJ0ZohVPlY4KOKW',
             'password_reset_token' => NULL,
@@ -57,6 +58,7 @@ class m170124_134745_populate_rbac extends Migration {
         $this->insert('{{%user}}', [
             'role_id' => 2,
             'username' => 'owner',
+            'display_name' => 'Owner Khan',
             'auth_key' => 'uFV5Q9qJohDWYncoQHFrxseHXtKi_NAw',
             'password_hash' => '$2y$13$ORxopAX0uvH.BWsL37uwu.AEawObqeB9NPNRlwl6dwMz10ELEjD0e',
             'password_reset_token' => NULL,
@@ -70,6 +72,7 @@ class m170124_134745_populate_rbac extends Migration {
         $this->insert('{{%user}}', [
             'role_id' => 1,
             'username' => 'admin',
+            'display_name' => 'Administrator',
             'auth_key' => 'pLz_H-CirXjZA06wMvstc6xXTgUyeFWQ',
             'password_hash' => '$2y$13$mWXFFmssulCjeXPaImUy3.HrkFinZlnfQ7cFBn/2YjxpyQxL1AlPK',
             'password_reset_token' => NULL,

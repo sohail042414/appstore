@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\ApplicationImage */
+/* @var $model backend\models\ImageSize */
 
-$this->title = 'Create Application Image';
-$this->params['breadcrumbs'][] = ['label' => 'Application Images', 'url' => ['index']];
+$this->title = 'Create Image Size';
+$this->params['breadcrumbs'][] = ['label' => 'Image Sizes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="application-image-create">
+<div class="image-size-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

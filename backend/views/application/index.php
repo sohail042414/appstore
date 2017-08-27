@@ -18,15 +18,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Application', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'title',
-            'description:ntext',
+            'package_id',
+            'short_description:ntext',
             'playstore_url:ntext',
             'version',
             // 'user_id',
@@ -35,8 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updated_by',
             // 'created_at',
             // 'updated_at',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>

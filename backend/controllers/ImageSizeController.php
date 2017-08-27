@@ -3,16 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\ApplicationImage;
-use backend\models\SearchApplicationImage;
+use backend\models\ImageSize;
+use backend\models\SearchImageSize;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\components\BackController;
 
 /**
- * ApplicationImageController implements the CRUD actions for ApplicationImage model.
+ * ImageSizeController implements the CRUD actions for ImageSize model.
  */
-class ApplicationImageController extends Controller {
+class ImageSizeController extends BackController {
 
     /**
      * @inheritdoc
@@ -29,11 +30,11 @@ class ApplicationImageController extends Controller {
     }
 
     /**
-     * Lists all ApplicationImage models.
+     * Lists all ImageSize models.
      * @return mixed
      */
     public function actionIndex() {
-        $searchModel = new SearchApplicationImage();
+        $searchModel = new SearchImageSize();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,7 +44,7 @@ class ApplicationImageController extends Controller {
     }
 
     /**
-     * Displays a single ApplicationImage model.
+     * Displays a single ImageSize model.
      * @param integer $id
      * @return mixed
      */
@@ -54,12 +55,12 @@ class ApplicationImageController extends Controller {
     }
 
     /**
-     * Creates a new ApplicationImage model.
+     * Creates a new ImageSize model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate() {
-        $model = new ApplicationImage();
+        $model = new ImageSize();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -71,7 +72,7 @@ class ApplicationImageController extends Controller {
     }
 
     /**
-     * Updates an existing ApplicationImage model.
+     * Updates an existing ImageSize model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -89,7 +90,7 @@ class ApplicationImageController extends Controller {
     }
 
     /**
-     * Deletes an existing ApplicationImage model.
+     * Deletes an existing ImageSize model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -101,14 +102,14 @@ class ApplicationImageController extends Controller {
     }
 
     /**
-     * Finds the ApplicationImage model based on its primary key value.
+     * Finds the ImageSize model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ApplicationImage the loaded model
+     * @return ImageSize the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id) {
-        if (($model = ApplicationImage::findOne($id)) !== null) {
+        if (($model = ImageSize::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

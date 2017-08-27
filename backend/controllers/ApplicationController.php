@@ -10,25 +10,12 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\models\SearchApplicationImage;
 use yii\web\UploadedFile;
+use backend\components\BackController;
 
 /**
  * ApplicationController implements the CRUD actions for Application model.
  */
-class ApplicationController extends Controller {
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors() {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+class ApplicationController extends BackController {
 
     /**
      * Lists all Application models.
@@ -50,8 +37,14 @@ class ApplicationController extends Controller {
      * @return mixed
      */
     public function actionView($id) {
+
+        $searchImageModel = new SearchApplicationImage();
+        $imageDataProvider = $searchImageModel->search(['SearchApplicationImage' => ['application_id' => $id]]);
+
+
         return $this->render('view', [
                     'model' => $this->findModel($id),
+                    'imageDataProvider' => $imageDataProvider,
         ]);
     }
 
@@ -66,13 +59,6 @@ class ApplicationController extends Controller {
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-
-            if (!empty($model->errors)) {
-                echo "<pre>";
-                print_r($model->errors);
-                exit;
-            }
-
             return $this->render('create', [
                         'model' => $model,
             ]);
@@ -86,7 +72,10 @@ class ApplicationController extends Controller {
      * @return mixed
      */
     public function actionUpdate($id) {
+
         $model = $this->findModel($id);
+
+        $tab = Yii::$app->request->get('tab', 'general');
 
         $appliationImageModel = new \backend\models\ApplicationImage;
         $appliationImageModel->application_id = $id;
@@ -98,25 +87,13 @@ class ApplicationController extends Controller {
 
         if (isset($post['ApplicationImage'])) {
 
+            $tab = 'images';
+
             $appliationImageModel->imageFile = UploadedFile::getInstance($appliationImageModel, 'imageFile');
 
-            if ($appliationImageModel->upload()) {
+            if ($appliationImageModel->upload() && $appliationImageModel->load($post)) {
 
-
-//                echo "<pre>";
-//                print_r($appliationImageModel);
-//                exit;
-
-                if ($appliationImageModel->load($post) && $appliationImageModel->save()) {
-
-                    echo "<pre>";
-                    print_r($appliationImageModel->errors);
-                    exit;
-                }
-            } else {
-                echo "<pre>232323232";
-                print_r($appliationImageModel->errors);
-                exit;
+                $appliationImageModel->save();
             }
         }
 
@@ -131,6 +108,7 @@ class ApplicationController extends Controller {
 
         return $this->render('update', [
                     'model' => $model,
+                    'tab' => $tab,
                     'imageDataProvider' => $imageDataProvider,
                     'appliationImageModel' => $appliationImageModel
         ]);
@@ -146,6 +124,23 @@ class ApplicationController extends Controller {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Deletes an application image,  existing Application model.
+     * If deletion is successful, the browser will be redirected to the respective application update page.
+     * @param integer $imageId
+     * @return mixed
+     */
+    public function actionDeleteimage($imageId) {
+
+        $imageModel = \backend\models\ApplicationImage::findOne($imageId);
+
+        $application_id = $imageModel->application_id;
+
+        $imageModel->delete();
+
+        return $this->redirect(['update', 'id' => $application_id, 'tab' => 'images']);
     }
 
     /**

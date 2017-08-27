@@ -14,7 +14,7 @@ use Yii;
  * @property integer $width
  * @property integer $height
  */
-class ImageSize extends \common\models\ActiveRecord {
+class ImageSize extends \common\models\ImageSize {
 
     /**
      * @inheritdoc

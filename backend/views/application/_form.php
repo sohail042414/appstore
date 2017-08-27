@@ -16,9 +16,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'package_id')->textInput() ?>
+
+    <?= $form->field($model, 'short_description')->textarea(['rows' => 2]) ?>
+
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'playstore_url')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'playstore_url')->textInput(); ?>
 
     <?= $form->field($model, 'version')->textInput() ?>
 

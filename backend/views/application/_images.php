@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
 <div class="application-form">
 
 
-    <div class="col-lg-6 col-md-6">
+    <div class="col-lg-4 col-md-4">
 
         <div class="application-image-form">
 
@@ -42,7 +42,7 @@ use yii\helpers\ArrayHelper;
     </div>
 
 
-    <div class="col-lg-6 col-md-6">
+    <div class="col-lg-8 col-md-8">
         <?=
         GridView::widget([
             'dataProvider' => $imageDataProvider,
@@ -53,7 +53,25 @@ use yii\helpers\ArrayHelper;
                 'application_id',
                 'name',
                 'type',
-                ['class' => 'yii\grid\ActionColumn'],
+                //['class' => 'yii\grid\ActionColumn'],
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'header' => 'Actions',
+                    'template' => '{delete}',
+                    'buttons' => [
+                        'delete' => function ($url, $model) {
+                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
+                                        'title' => Yii::t('app', 'lead-delete'),
+                            ]);
+                        }
+                    ],
+                    'urlCreator' => function ($action, $model, $key, $index) {
+                        if ($action === 'delete') {
+                            $url = 'deleteimage?imageId=' . $model->id;
+                            return $url;
+                        }
+                    }
+                ],
             ],
         ]);
         ?>

@@ -1,14 +1,13 @@
 <?php
 
-namespace backend\componenets;
+namespace backend\components;
 
 use Yii;
 use yii\web\Controller;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 
-/**
- * Site controller
- */
-class BackendController extends Controller {
+class BackController extends Controller {
 
     /**
      * @inheritdoc
@@ -17,15 +16,12 @@ class BackendController extends Controller {
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'update', 'delete'],
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index'],
-                        'allow' => true,
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
                         'roles' => ['@'],
+                        'allow' => true,
                     ],
                 ],
             ],

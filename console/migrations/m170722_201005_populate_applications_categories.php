@@ -22,6 +22,7 @@ class m170722_201005_populate_applications_categories extends Migration {
         $this->insert('{{%application}}', [
             'package_id' => 'testingapplicasdfasfasdationasdfasdjflasjdfasdjfl',
             'title' => 'Sub way surfers',
+            'short_description' => 'This is short description',
             'description' => 'This is very good game',
             'playstore_url' => 'http://play.google.com',
             'user_id' => $user_id,
@@ -39,6 +40,7 @@ class m170722_201005_populate_applications_categories extends Migration {
         $this->insert('{{%application}}', [
             'package_id' => 'testingapplicationasdfasdjflsdfasdfasjdfasdjfl',
             'title' => 'Candy Crush',
+            'short_description' => 'This is short description',
             'description' => 'Here you crush candies',
             'playstore_url' => 'http://play.google.com',
             'user_id' => $user_id,
@@ -67,6 +69,7 @@ class m170722_201005_populate_applications_categories extends Migration {
         $this->insert('{{%application}}', [
             'package_id' => 'testingapplicationasdfasdjflasjdfasdjfasdfasdfl',
             'title' => 'Ten Sports',
+            'short_description' => 'This is short description',
             'description' => ' Here you watch ten sports live.',
             'playstore_url' => 'http://play.google.com',
             'user_id' => $user_id,
@@ -86,6 +89,7 @@ class m170722_201005_populate_applications_categories extends Migration {
         $this->insert('{{%application}}', [
             'package_id' => 'testingapplicationasdfasdjflasjdfasdjfl',
             'title' => 'Espncricinfo',
+            'short_description' => 'This is short description',
             'description' => ' Here you can check all live cricket matches around the globe.',
             'playstore_url' => 'http://play.google.com',
             'user_id' => $user_id,
@@ -114,6 +118,7 @@ class m170722_201005_populate_applications_categories extends Migration {
         $this->insert('{{%application}}', [
             'package_id' => 'testingapplicationasdfas343djflasjdfasdjfl',
             'title' => 'Doctors online',
+            'short_description' => 'This is short description',
             'description' => ' Many doctors available to discuss you problems here.',
             'playstore_url' => 'http://play.google.com',
             'user_id' => $user_id,
@@ -132,6 +137,7 @@ class m170722_201005_populate_applications_categories extends Migration {
         $this->insert('{{%application}}', [
             'package_id' => 'testingapplicationasdfasdjflaasdfas222sjdfasdjfl',
             'title' => 'Fitnuss club ',
+            'short_description' => 'This is short description',
             'description' => ' See each and everything related to fitness.',
             'playstore_url' => 'http://play.google.com',
             'user_id' => $user_id,

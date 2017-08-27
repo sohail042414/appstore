@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\SearchApplicationImage */
+/* @var $model backend\models\SearchImageSize */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="application-image-search">
+<div class="image-size-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,11 +17,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'application_id') ?>
+    <?= $form->field($model, 'description') ?>
 
-    <?= $form->field($model, 'name') ?>
+    <?= $form->field($model, 'system') ?>
 
     <?= $form->field($model, 'type') ?>
+
+    <?= $form->field($model, 'width') ?>
+
+    <?php // echo $form->field($model, 'height') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

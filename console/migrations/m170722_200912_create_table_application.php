@@ -8,8 +8,9 @@ class m170722_200912_create_table_application extends Migration {
     public function safeUp() {
         $this->createTable('{{%application}}', [
             'id' => $this->primaryKey(),
-            'package_id' => $this->string(255)->notNull(),
+            'package_id' => $this->string(255)->notNull()->unique(),
             'title' => $this->string(50)->notNull(),
+            'short_description' => $this->string(255)->notNull(),
             'description' => $this->text(),
             'playstore_url' => $this->text()->notNull(),
             'version' => $this->float()->defaultValue(1.0),

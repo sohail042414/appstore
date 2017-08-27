@@ -33,28 +33,37 @@ AppAsset::register($this);
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
             ]);
-            $menuItems = [
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'Categories',
-                    'items' => [
-                        ['label' => 'All Categories', 'url' => ['/category/index']],
-                        ['label' => 'Create Category', 'url' => ['/category/create']]
-                    ]
-                ],
-                ['label' => 'Applications',
-                    'items' => [
-                        ['label' => 'All Applications', 'url' => ['/application/index']],
-                        ['label' => 'Create Application', 'url' => ['/application/create']],
-                    ]
-                ],
-            ];
+
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
             } else {
+                $menuItems = [
+                    ['label' => 'Home', 'url' => ['/site/index']],
+                    ['label' => 'Categories',
+                        'items' => [
+                            ['label' => 'All Categories', 'url' => ['/category/index']],
+                            ['label' => 'Create Category', 'url' => ['/category/create']]
+                        ]
+                    ],
+                    ['label' => 'Applications',
+                        'items' => [
+                            ['label' => 'All Applications', 'url' => ['/application/index']],
+                            ['label' => 'Create Application', 'url' => ['/application/create']],
+                        ]
+                    ],
+                    ['label' => 'Image Sizes',
+                        'items' => [
+                            ['label' => 'All Sizes', 'url' => ['/image-size/index']],
+                            ['label' => 'Create Size', 'url' => ['/image-size/create']],
+                        ]
+                    ],
+                ];
+
+
                 $menuItems[] = '<li>'
                         . Html::beginForm(['/site/logout'], 'post')
                         . Html::submitButton(
-                                'Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']
+                                'Logout (' . Yii::$app->user->identity->display_name . ')', ['class' => 'btn btn-link logout']
                         )
                         . Html::endForm()
                         . '</li>';
@@ -79,9 +88,7 @@ AppAsset::register($this);
 
         <footer class="footer">
             <div class="container">
-                <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-                <p class="pull-right"><?= Yii::powered() ?></p>
+                <p class="pull-left">&copy;And Stutios <?= date('Y') ?></p>
             </div>
         </footer>
 

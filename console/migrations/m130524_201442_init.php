@@ -28,6 +28,7 @@ class m130524_201442_init extends Migration {
             'id' => $this->primaryKey(),
             'role_id' => $this->integer()->notNull(),
             'username' => $this->string()->notNull()->unique(),
+            'display_name' => $this->string(40)->notNull(),
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),

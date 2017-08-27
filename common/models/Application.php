@@ -8,7 +8,9 @@ use Yii;
  * This is the model class for table "{{%application}}".
  *
  * @property integer $id
- * @property string $title
+ * @property string $title 
+ * @property string $package_id
+ * @property string $short_description
  * @property string $description
  * @property string $playstore_url
  * @property double $version
@@ -40,6 +42,8 @@ class Application extends \yii\db\ActiveRecord {
         return [
             'id' => 'ID',
             'title' => 'Title',
+            'package_id' => 'Package Id',
+            'short_description' => 'Short Description',
             'description' => 'Description',
             'playstore_url' => 'Playstore Url',
             'version' => 'Version',
@@ -58,6 +62,13 @@ class Application extends \yii\db\ActiveRecord {
      */
     public function getUser() {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUpdatedBy() {
+        return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
 
     /**

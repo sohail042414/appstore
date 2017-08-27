@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace frontend\models;
 
 use Yii;
 
@@ -14,14 +14,7 @@ use Yii;
  *
  * @property Application $application
  */
-class ApplicationImage extends \yii\db\ActiveRecord {
-
-    /**
-     * @inheritdoc
-     */
-    public static function tableName() {
-        return '{{%application_image}}';
-    }
+class ApplicationImage extends \common\models\ApplicationImage {
 
     /**
      * @inheritdoc
@@ -33,13 +26,6 @@ class ApplicationImage extends \yii\db\ActiveRecord {
             'name' => 'Name',
             'type' => 'Type',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getApplication() {
-        return $this->hasOne(Application::className(), ['id' => 'application_id']);
     }
 
 }

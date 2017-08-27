@@ -8,32 +8,18 @@ use backend\models\SearchCategory;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\components\BackController;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
  */
-class CategoryController extends Controller {
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors() {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+class CategoryController extends BackController {
 
     /**
      * Lists all Category models.
      * @return mixed
      */
     public function actionIndex() {
-        $this->layout = "/column2";
         $searchModel = new SearchCategory();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

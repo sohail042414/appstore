@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = 'Update';
             [
                 'label' => 'General',
                 'content' => $this->render('_form', ['model' => $model]),
-                'active' => true
+                'active' => ($tab == 'general') ? TRUE : FALSE,
             ],
             [
                 'label' => 'Images',
@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = 'Update';
                     'imageDataProvider' => $imageDataProvider,
                     'appliationImageModel' => $appliationImageModel
                 ]),
+                'active' => ($tab == 'images') ? TRUE : FALSE,
             ],
     ]]);
     ?>

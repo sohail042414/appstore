@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\bootstrap\Tabs;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Application */
@@ -16,30 +18,65 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?=
+        Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
-        ]) ?>
+        ])
+        ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title',
-            'description:ntext',
-            'playstore_url:ntext',
-            'version',
-            'user_id',
-            'special',
-            'featured',
-            'updated_by',
-            'created_at',
-            'updated_at',
-        ],
-    ]) ?>
+
+    <?=
+    Tabs::widget([
+        'items' => [
+            [
+                'label' => 'General',
+                'content' => DetailView::widget([
+                    'model' => $model,
+                    'attributes' => [
+                        'id',
+                        'title',
+                        'package_id',
+                        'short_description:text',
+                        'description:ntext',
+                        'playstore_url:ntext',
+                        'version',
+                        'user_id',
+                        [
+                            'attribute' => 'user.display_name',
+                            'label' => 'User'
+                        ],
+                        'special:boolean',
+                        'featured:boolean',
+                        [
+                            'attribute' => 'updatedBy.display_name',
+                            'label' => 'Updated By'
+                        ],
+                        'created_at:datetime',
+                        'updated_at:datetime',
+                    ],
+                ]),
+                'active' => TRUE,
+            ],
+            [
+                'label' => 'Images',
+                'content' => GridView::widget([
+                    'dataProvider' => $imageDataProvider,
+                    //'filterModel' => $searchModel,
+                    'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
+                        'id',
+                        'application_id',
+                        'name',
+                        'type',
+                    ],
+                ])
+            ],
+    ]]);
+    ?>
 
 </div>
