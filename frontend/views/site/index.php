@@ -29,8 +29,8 @@
                                 <a href="gallery-single.htm" class="item-details-link"></a>
                             </span>
                         </span>
-                        <a href="gallery-single.htm"><img src="<?php echo Yii::$app->homeUrl; ?>picolo/img/gallery/gallery-img-1-4col.jpg" alt="Gallery"></a>
-                        <span class="project-details"><a href="gallery-single.htm"><?php echo $app['title']; ?></a> <?php echo substr($app['description'], 0, 30); ?></span>
+                        <a href="<?php echo $app->getUrl(); ?>"><img src="<?php echo $app->getDisplayImageUrl(); ?>" alt="Gallery"></a>
+                        <span class="project-details"><a target="_blank" href="<?php echo $app->getUrl(); ?>"><?php echo $app->title; ?></a> <?php echo $app->short_description; ?></span>
                     </li>
 
                 <?php } ?>

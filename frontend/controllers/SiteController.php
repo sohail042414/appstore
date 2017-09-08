@@ -80,7 +80,12 @@ class SiteController extends Controller {
      */
     public function actionIndex() {
         $this->layout = "site";
-        $applications = \frontend\models\Application::find()->where(['version' => 1])->asArray()->all();
+        $applications = \frontend\models\Application::find()->where(['version' => 1])->all();
+
+//        foreach ($applications as $app) {
+//            $app->getDisplayImageUrl();
+//            exit;
+//        }
 
         return $this->render('index', array('applications' => $applications));
     }

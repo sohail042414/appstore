@@ -51,7 +51,7 @@ class AddsController extends Controller {
             'AppsList-Android' => $adds
         ];
 
-        echo "<pre>";
+        //echo "<pre>";
 
         print_r(json_encode($output, JSON_PRETTY_PRINT));
 

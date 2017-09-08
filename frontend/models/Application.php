@@ -9,10 +9,13 @@ use Yii;
  *
  * @property integer $id
  * @property string $title
+ * @property string $short_description
+ * @property string $package_id
  * @property string $description
  * @property string $playstore_url
  * @property double $version
  * @property integer $user_id
+ * @property integer $status
  * @property integer $special
  * @property integer $featured
  * @property integer $updated_by
@@ -42,6 +45,26 @@ class Application extends \common\models\Application {
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function getDisplayImageUrl() {
+        $imageObject = \frontend\models\ApplicationImage::find()
+                ->where(['application_id' => $this->id, 'type' => 'display'])
+                ->one();
+
+        return Yii::getAlias('@web') . '/uploads/' . $imageObject->name;
+
+        //$url = \yii\helpers\Url::to('frontend/web/uploads/' . $imageObject->name);
+        //return \yii\helpers\Url::to('frontend/web/uploads/' . $imageObject->name);
+    }
+
+    public function getUrl() {
+
+        if (!empty($this->playstore_url)) {
+            return $this->playstore_url;
+        }
+
+        return '#';
     }
 
 }

@@ -9,7 +9,7 @@
 
     <!-- Main Navigation
     ================================================== -->
-    <div class="span7 navigation">
+    <div class="span7 navigation" style="display: none;">
         <div class="navbar hidden-phone">
 
             <ul class="nav">

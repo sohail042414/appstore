@@ -136,6 +136,8 @@ class ApplicationController extends BackController {
 
         $imageModel = \backend\models\ApplicationImage::findOne($imageId);
 
+        $imageModel->removeFile();
+        
         $application_id = $imageModel->application_id;
 
         $imageModel->delete();

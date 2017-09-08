@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%application_image}}".
@@ -34,7 +35,7 @@ class ApplicationImage extends \common\models\ApplicationImage {
              * 
              */
             [['application_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => Application::className(), 'targetAttribute' => ['application_id' => 'id']],
-            [['imageFile'], 'file', 'skipOnEmpty' => TRUE, 'extensions' => 'png, jpg'],
+            [['imageFile'], 'file', 'skipOnEmpty' => TRUE, 'extensions' => 'png, jpg,jpeg'],
         ];
     }
 
@@ -47,13 +48,19 @@ class ApplicationImage extends \common\models\ApplicationImage {
                 return FALSE;
             }
 
-            if ($this->imageFile->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension)) {
-                $this->name = $this->imageFile->name;
+            $newName = 'app-' . $this->application_id . '-' . time() . '-image.' . $this->imageFile->extension;
+
+            if ($this->imageFile->saveAs(Url::to('@frontend/web/uploads/') . $newName)) {
+                $this->name = $newName;
                 return TRUE;
             }
         }
 
         return FALSE;
+    }
+
+    public function removeFile() {
+        @unlink(Url::to('@frontend/web/uploads/') . $this->name);
     }
 
 }
