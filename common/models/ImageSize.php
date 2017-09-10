@@ -14,21 +14,19 @@ use Yii;
  * @property integer $width
  * @property integer $height
  */
-class ImageSize extends \yii\db\ActiveRecord
-{
+class ImageSize extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return '{{%image_size}}';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['description'], 'string'],
             [['system', 'width', 'height'], 'integer'],
@@ -40,15 +38,15 @@ class ImageSize extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'description' => 'Description',
             'system' => 'System',
             'type' => 'Type',
-            'width' => 'Width',
-            'height' => 'Height',
+            'width' => 'Width(px)',
+            'height' => 'Height(px)',
         ];
     }
+
 }

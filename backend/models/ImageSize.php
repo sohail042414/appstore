@@ -37,8 +37,8 @@ class ImageSize extends \common\models\ImageSize {
             'description' => 'Description',
             'system' => 'System',
             'type' => 'Type',
-            'width' => 'Width',
-            'height' => 'Height',
+            'width' => 'Width(px)',
+            'height' => 'Height(px)',
         ];
     }
 

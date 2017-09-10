@@ -27,13 +27,21 @@ class ApplicationImage extends \common\models\ApplicationImage {
             [['application_id'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['type'], 'string', 'max' => 20],
-            /*
-              [['type'], 'unique', 'message' => '{value} already exists, delete it to upload again!', 'when' => function() {
-              return ($this->type == 'normal') ? FALSE : TRUE;
-              }
-              ],
-             * 
-             */
+            [['type'], 'unique', 'message' => '{value} already exists, delete it to upload again!', 'when' => function() {
+
+                    if ($this->type == 'normal') {
+                        return FALSE;
+                    }
+
+                    $image = $this->find()->where(['application_id' => $this->application_id, 'type' => $this->type])->one();
+
+                    if (is_object($image)) {
+                        return TRUE;
+                    }
+
+                    return FALSE;
+                }
+            ],
             [['application_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => Application::className(), 'targetAttribute' => ['application_id' => 'id']],
             [['imageFile'], 'file', 'skipOnEmpty' => TRUE, 'extensions' => 'png, jpg,jpeg'],
         ];

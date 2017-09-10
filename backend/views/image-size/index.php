@@ -18,20 +18,33 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Image Size', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'description:ntext',
-            'system',
             'type',
+            'system:boolean',
             'width',
-            // 'height',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            'height',
+            //['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'contentOptions' => ['style' => 'width:260px;'],
+                'header' => 'Actions',
+                'template' => '{view}{update}{delete}',
+                'visibleButtons' => [
+                    'view' => TRUE,
+                    'update' => TRUE,
+                    'delete' => function($model) {
+                        return $model->system ? FALSE : TRUE;
+                    }
+                ]
+            ]
         ],
-    ]); ?>
+    ]);
+    ?>
 </div>

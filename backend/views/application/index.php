@@ -9,6 +9,7 @@ use yii\grid\GridView;
 
 $this->title = 'Applications';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="application-index">
 
@@ -19,23 +20,25 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Application', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?=
+    //Yii::$app->formatter->booleanFormat = ['Active', 'Disabled'];
+
     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function ($model) {
+            return [
+                'class' => ($model->status == 1) ? '' : 'danger'
+            ];
+        },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'id',
+            'status:boolean',
             'title',
             'package_id',
             'short_description:ntext',
             'playstore_url:ntext',
             'version',
-            // 'user_id',
-            // 'special',
-            // 'featured',
-            // 'updated_by',
-            // 'created_at',
-            // 'updated_at',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]);

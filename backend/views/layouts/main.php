@@ -51,7 +51,18 @@ AppAsset::register($this);
                             ['label' => 'Create Application', 'url' => ['/application/create']],
                         ]
                     ],
-                    ['label' => 'Image Sizes',
+                    ['label' => 'Manage Adds',
+                        'items' => [
+                            ['label' => 'Adds', 'url' => ['/adds/index']],
+                        ]
+                    ],
+                    ['label' => 'Settings',
+                        'items' => [
+                            ['label' => 'Settings', 'url' => ['/setting/index']],
+                            ['label' => 'Setting Groups', 'url' => ['/setting-group/index']],
+                        ]
+                    ],
+                    ['label' => 'Image(Adds) Sizes',
                         'items' => [
                             ['label' => 'All Sizes', 'url' => ['/image-size/index']],
                             ['label' => 'Create Size', 'url' => ['/image-size/create']],

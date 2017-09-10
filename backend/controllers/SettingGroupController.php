@@ -3,17 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\ImageSize;
-use backend\models\SearchImageSize;
+use backend\models\SettingGroup;
+use backend\models\SearchSettingGroup;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\components\BackController;
 
 /**
- * ImageSizeController implements the CRUD actions for ImageSize model.
+ * SettingGroupController implements the CRUD actions for SettingGroup model.
  */
-class ImageSizeController extends BackController {
+class SettingGroupController extends Controller {
 
     /**
      * @inheritdoc
@@ -30,11 +29,11 @@ class ImageSizeController extends BackController {
     }
 
     /**
-     * Lists all ImageSize models.
+     * Lists all SettingGroup models.
      * @return mixed
      */
     public function actionIndex() {
-        $searchModel = new SearchImageSize();
+        $searchModel = new SearchSettingGroup();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -44,7 +43,7 @@ class ImageSizeController extends BackController {
     }
 
     /**
-     * Displays a single ImageSize model.
+     * Displays a single SettingGroup model.
      * @param integer $id
      * @return mixed
      */
@@ -55,12 +54,12 @@ class ImageSizeController extends BackController {
     }
 
     /**
-     * Creates a new ImageSize model.
+     * Creates a new SettingGroup model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate() {
-        $model = new ImageSize();
+        $model = new SettingGroup();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +71,7 @@ class ImageSizeController extends BackController {
     }
 
     /**
-     * Updates an existing ImageSize model.
+     * Updates an existing SettingGroup model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -90,31 +89,26 @@ class ImageSizeController extends BackController {
     }
 
     /**
-     * Deletes an existing ImageSize model.
+     * Deletes an existing SettingGroup model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id) {
-
-        $model = $this->findModel($id);
-
-        if (!$model->system) {
-            $model->delete();
-        }
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the ImageSize model based on its primary key value.
+     * Finds the SettingGroup model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ImageSize the loaded model
+     * @return SettingGroup the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id) {
-        if (($model = ImageSize::findOne($id)) !== null) {
+        if (($model = SettingGroup::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
